@@ -6,19 +6,27 @@ Backend do sistema ERP da USE SISTEMAS, desenvolvido com Node.js, Express e Mong
 
 ```
 backend/
-├── models/          # Modelos do MongoDB
-│   ├── Usuario.js   # Modelo de usuário
-│   └── Produto.js   # Modelo de produto
-├── routes/          # Rotas da API
-│   ├── auth.routes.js    # Rotas de autenticação
-│   └── estoque.routes.js # Rotas de estoque
-├── scripts/         # Scripts utilitários
+├── docs/           # Documentação
+│   ├── api.md     # Documentação da API
+│   └── USE_SISTEMAS.postman_collection.json  # Coleção Postman
+├── models/         # Modelos do MongoDB
+│   ├── Usuario.js  # Modelo de usuário
+│   ├── Cliente.js  # Modelo de cliente
+│   ├── Produto.js  # Modelo de produto
+│   ├── Venda.js    # Modelo de venda
+│   └── Financeiro.js # Modelo de transação financeira
+├── routes/         # Rotas da API
+│   ├── auth.routes.js      # Rotas de autenticação
+│   ├── clientes.routes.js  # Rotas de clientes
+│   ├── estoque.routes.js   # Rotas de estoque
+│   ├── vendas.routes.js    # Rotas de vendas
+│   └── financeiro.routes.js # Rotas financeiras
+├── scripts/        # Scripts utilitários
 │   └── init-admin.js     # Script para criar admin inicial
-├── .env             # Variáveis de ambiente
-├── .gitignore       # Arquivos ignorados pelo Git
-├── package.json     # Dependências e scripts
-├── README.md        # Esta documentação
-└── server.js        # Ponto de entrada da aplicação
+├── .env            # Variáveis de ambiente
+├── .gitignore      # Arquivos ignorados pelo Git
+├── package.json    # Dependências e scripts
+└── server.js       # Ponto de entrada da aplicação
 ```
 
 ## Requisitos
@@ -63,21 +71,46 @@ npm run dev
 npm start
 ```
 
-## API Endpoints
+## Testando a API
 
-### Autenticação
-- POST /api/auth/login - Login de usuário
-- POST /api/auth/registro - Registro de novo usuário (requer admin)
-- GET /api/auth/verificar - Verifica token JWT
+### Documentação
+A documentação completa da API está disponível em `/docs/api.md`.
 
-### Estoque
-- GET /api/estoque - Lista todos os produtos
-- GET /api/estoque/:id - Obtém produto específico
-- POST /api/estoque - Cadastra novo produto
-- PUT /api/estoque/:id - Atualiza produto
-- POST /api/estoque/:id/movimentacao - Registra movimentação
-- GET /api/estoque/:id/movimentacoes - Histórico de movimentações
-- GET /api/estoque/relatorios/estoque-baixo - Relatório de produtos com estoque baixo
+### Postman
+1. Importe a coleção do Postman disponível em `/docs/USE_SISTEMAS.postman_collection.json`
+2. Configure a variável de ambiente `baseUrl` para `http://localhost:5000/api`
+3. Faça login usando o endpoint `/auth/login` para obter o token
+4. O token será automaticamente usado nas demais requisições
+
+### Endpoints Principais
+
+- **Autenticação**
+  - POST /api/auth/login
+  - POST /api/auth/registro
+
+- **Clientes**
+  - GET /api/clientes
+  - POST /api/clientes
+  - GET /api/clientes/:id
+  - PUT /api/clientes/:id
+
+- **Estoque**
+  - GET /api/estoque
+  - POST /api/estoque
+  - GET /api/estoque/:id
+  - PUT /api/estoque/:id
+
+- **Vendas**
+  - GET /api/vendas
+  - POST /api/vendas
+  - GET /api/vendas/:id
+  - PATCH /api/vendas/:id/status
+
+- **Financeiro**
+  - GET /api/financeiro
+  - POST /api/financeiro
+  - GET /api/financeiro/:id
+  - POST /api/financeiro/:id/pagamento
 
 ## Segurança
 
