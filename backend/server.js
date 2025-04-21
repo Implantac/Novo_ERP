@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 // Rotas principais
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/usuarios', require('./routes/usuarios.routes'));
+app.use('/api/clientes', require('./routes/clientes.routes'));
 app.use('/api/estoque', require('./routes/estoque.routes'));
 app.use('/api/vendas', require('./routes/vendas.routes'));
 app.use('/api/financeiro', require('./routes/financeiro.routes'));
